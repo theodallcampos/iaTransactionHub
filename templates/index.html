@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=”utf-8″>
+    <title>Chat GP TransactionHUB</title>
+    <style>
+        body {
+            display: flex;
+            align-items: start; /* Alinha os itens no início do container */
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        #formContainer {
+            margin-left: 20px; /* Espaço entre a imagem e o formulário */
+        }
+        textarea, input[type="text"] {
+            width: 100%; /* Faz com que os inputs ocupem todo o espaço disponível */
+            padding: 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="TransactHub.jpg" alt="TransactHub Logo" style="height: 300px;">
+    <div id="formContainer">
+        <h1>Bem vindo a Inteligência Artificial da TransactionHUB. Como posso ajudar ?</h1>
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="text" id="question" placeholder="Pergunta" required>
+        <textarea id="answer" placeholder="Resposta" readonly></textarea>
+        <button onclick="submitQuestion()">Executar</button>
+    </div>
+
+    <script>
+        function submitQuestion() {
+            const name = document.getElementById('name').value;
+            const question = document.getElementById('question').value;
+
+            fetch('http://127.0.0.1:5000/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('answer').value = data.answer;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
