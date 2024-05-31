@@ -1,1 +1,1 @@
-web gunicorn app:ia-transactub
+web gunicorn app:main
