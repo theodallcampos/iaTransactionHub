@@ -1,13 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
-
+from chave import KEY
 
 app = Flask(__name__)
 CORS(app)
 
 # Substitua 'your-openai-api-key' pela sua chave API real do OpenAI.
-openai.api_key = 'sk-proj-0ElB2AkHOQflRoNXXaOIT3BlbkFJV2WxQkFsvYuijpFlzxCf'
+openai.api_key = KEY
 
 @app.route('/ask', methods=['POST'])
 def ask():
